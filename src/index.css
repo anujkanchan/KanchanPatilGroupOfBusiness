@@ -1,0 +1,244 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --gold-primary: #D4AF37;
+    --gold-accent: #FFD700;
+    --bg-dark: #080808;
+    --bg-secondary: #141414;
+    --forest-green: #1F6B3A;
+    --font-heading: 'Outfit', sans-serif;
+    --font-body: 'Poppins', sans-serif;
+    --font-button: 'Montserrat', sans-serif;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background-color: var(--bg-dark);
+    color: #ffffff;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6, .font-heading {
+    font-family: var(--font-heading);
+  }
+
+  button, .font-btn {
+    font-family: var(--font-button);
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #080808;
+}
+::-webkit-scrollbar-thumb {
+  background: #2a2a2a;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #D4AF37;
+}
+
+/* Glassmorphism Effect */
+.glass-panel {
+  background: rgba(20, 20, 20, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+.glass-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(20, 20, 20, 0.8) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.glass-card:hover {
+  border-color: rgba(255, 215, 0, 0.5);
+  box-shadow: 0 10px 30px -10px rgba(212, 175, 55, 0.25);
+}
+
+/* Gold Gradient Text */
+.gold-text-gradient {
+  background: linear-gradient(135deg, #FFF0B9 0%, #D4AF37 50%, #AA7C11 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-glow-text {
+  text-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+}
+
+/* Luxury Animated Border */
+.gold-border-glow {
+  position: relative;
+}
+.gold-border-glow::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(90deg, #D4AF37, #FFD700, #1F6B3A, #D4AF37);
+  background-size: 300% 300%;
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0.3;
+  transition: opacity 0.4s ease;
+  animation: borderRotate 8s linear infinite;
+}
+.gold-border-glow:hover::before {
+  opacity: 1;
+}
+
+@keyframes borderRotate {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Custom Scroll Pill */
+@keyframes floatY {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(8px); }
+}
+
+.animate-float {
+  animation: floatY 3s ease-in-out infinite;
+}
+
+/* Premium Ambient Background Aurora Animations (15-42s organic multi-axis drift) */
+@keyframes auroraDrift1 {
+  0% {
+    transform: translate3d(0%, 0%, 0) scale(1);
+  }
+  33% {
+    transform: translate3d(8%, 10%, 0) scale(1.08);
+  }
+  66% {
+    transform: translate3d(-5%, 12%, 0) scale(0.96);
+  }
+  100% {
+    transform: translate3d(4%, -6%, 0) scale(1.04);
+  }
+}
+
+@keyframes auroraDrift2 {
+  0% {
+    transform: translate3d(0%, 0%, 0) scale(1);
+  }
+  35% {
+    transform: translate3d(-10%, -8%, 0) scale(0.94);
+  }
+  70% {
+    transform: translate3d(8%, -12%, 0) scale(1.06);
+  }
+  100% {
+    transform: translate3d(-6%, 8%, 0) scale(0.98);
+  }
+}
+
+@keyframes auroraDrift3 {
+  0% {
+    transform: translate3d(0%, 0%, 0) scale(1.02);
+  }
+  40% {
+    transform: translate3d(10%, -9%, 0) scale(0.95);
+  }
+  75% {
+    transform: translate3d(-7%, 6%, 0) scale(1.07);
+  }
+  100% {
+    transform: translate3d(6%, 9%, 0) scale(1);
+  }
+}
+
+@keyframes auroraDrift4 {
+  0% {
+    transform: translate3d(0%, 0%, 0) scale(0.96);
+  }
+  30% {
+    transform: translate3d(-8%, 10%, 0) scale(1.05);
+  }
+  65% {
+    transform: translate3d(7%, -8%, 0) scale(0.92);
+  }
+  100% {
+    transform: translate3d(-5%, -5%, 0) scale(1.03);
+  }
+}
+
+.animate-aurora-1 {
+  animation: auroraDrift1 34s ease-in-out infinite alternate;
+}
+
+.animate-aurora-2 {
+  animation: auroraDrift2 42s ease-in-out infinite alternate;
+}
+
+.animate-aurora-3 {
+  animation: auroraDrift3 38s ease-in-out infinite alternate;
+}
+
+.animate-aurora-4 {
+  animation: auroraDrift4 28s ease-in-out infinite alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-aurora-1,
+  .animate-aurora-2,
+  .animate-aurora-3,
+  .animate-aurora-4 {
+    animation: none !important;
+  }
+}
+
+/* Allow live ambient background to flow seamlessly behind sections while keeping cards & text pristine */
+main > section {
+  background-color: transparent !important;
+}
+
+/* ==========================================================================
+   India Geographical Border Light-Orange (#FFB366) Pulsating Glow Keyframes
+   Soft, illuminated breathing appearance for India country boundary
+   ========================================================================== */
+@keyframes indiaBorderPulse {
+  0%, 100% {
+    stroke-opacity: 0.85;
+    filter: drop-shadow(0 0 3px rgba(255, 179, 102, 0.45)) drop-shadow(0 0 8px rgba(255, 153, 51, 0.35));
+    opacity: 0.85;
+  }
+  50% {
+    stroke-opacity: 1;
+    filter: drop-shadow(0 0 6px rgba(255, 179, 102, 0.95)) drop-shadow(0 0 16px rgba(255, 153, 51, 0.7));
+    opacity: 1;
+  }
+}
+
+@keyframes indiaGlowPulse {
+  0%, 100% {
+    stroke-opacity: 0.35;
+    filter: drop-shadow(0 0 6px rgba(255, 153, 51, 0.4));
+    opacity: 0.38;
+  }
+  50% {
+    stroke-opacity: 0.75;
+    filter: drop-shadow(0 0 12px rgba(255, 179, 102, 0.85)) drop-shadow(0 0 24px rgba(255, 153, 51, 0.65));
+    opacity: 0.72;
+  }
+}
+
+.india-border-pulse,
+[stroke="#FFB366"],
+.india-border-light-orange {
+  animation: indiaBorderPulse 2.8s ease-in-out infinite;
+}
+
+.india-glow-pulse,
+.india-border-glow-aura {
+  animation: indiaGlowPulse 2.8s ease-in-out infinite;
+}
+
