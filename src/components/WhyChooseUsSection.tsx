@@ -1,9 +1,12 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Award, Sprout, HeartHandshake, Leaf, ShieldAlert } from 'lucide-react';
-import { FEATURES_DATA } from '../data/content';
+import { Award, Sprout, HeartHandshake, Leaf } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 export const WhyChooseUsSection: React.FC = () => {
+  const { content, t } = useLanguage();
+  const features = content.FEATURES_DATA;
+
   const getIcon = (iconName: string) => {
     switch (iconName) {
       case 'Award':
@@ -33,7 +36,7 @@ export const WhyChooseUsSection: React.FC = () => {
             className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full glass-panel border border-[#D4AF37]/30 mb-3"
           >
             <span className="text-xs uppercase tracking-widest text-[#D4AF37] font-semibold">
-              The Kanchan Patil Group Difference
+              {t('why.eyebrow')}
             </span>
           </motion.div>
 
@@ -44,7 +47,7 @@ export const WhyChooseUsSection: React.FC = () => {
             transition={{ delay: 0.1 }}
             className="font-heading text-3xl sm:text-5xl font-extrabold text-white tracking-tight mb-4 leading-tight"
           >
-            Why Choose <span className="gold-text-gradient">KANCHAN PATIL GROUP</span>
+            {t('why.titlePre')} <span className="gold-text-gradient">{t('why.titleHighlight')}</span>
           </motion.h2>
 
           <motion.p
@@ -54,13 +57,13 @@ export const WhyChooseUsSection: React.FC = () => {
             transition={{ delay: 0.2 }}
             className="text-gray-300 text-base sm:text-lg font-light"
           >
-            Pioneering ethical, chemical-free agriculture and botanical innovation designed for long-term trust.
+            {t('why.subtitle')}
           </motion.p>
         </div>
 
         {/* 4 Animated Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {FEATURES_DATA.map((feature, idx) => (
+          {features.map((feature, idx) => (
             <motion.div
               key={feature.id}
               initial={{ opacity: 0, y: 30 }}
@@ -73,7 +76,7 @@ export const WhyChooseUsSection: React.FC = () => {
               <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-[#D4AF37]/10 to-transparent rounded-tr-2xl pointer-events-none group-hover:opacity-100 transition-opacity opacity-0" />
 
               <div>
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#D4AF37]/20 via-[#141414] to-[#1F6B3A]/30 border border-[#D4AF37]/30 flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(212,175,55,0.2)] group-hover:border-[#FFD700] transition-colors">
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#1F6B3A]/30 to-[#D4AF37]/20 border border-[#D4AF37]/40 flex items-center justify-center mb-6 shadow-inner group-hover:border-[#FFD700] transition-colors">
                   {getIcon(feature.icon)}
                 </div>
 
@@ -81,14 +84,14 @@ export const WhyChooseUsSection: React.FC = () => {
                   {feature.title}
                 </h3>
 
-                <p className="text-gray-300 text-sm leading-relaxed font-light">
+                <p className="text-gray-400 text-sm leading-relaxed font-light">
                   {feature.description}
                 </p>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-xs text-[#D4AF37] font-semibold tracking-wider uppercase">
-                <span>Gold Standard</span>
-                <span className="w-1.5 h-1.5 rounded-full bg-[#FFD700] shadow-[0_0_8px_#FFD700]" />
+              <div className="mt-6 pt-4 border-t border-white/5 flex items-center gap-1.5 text-xs text-[#D4AF37] font-semibold">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#FFD700]" />
+                K Group Standard
               </div>
             </motion.div>
           ))}

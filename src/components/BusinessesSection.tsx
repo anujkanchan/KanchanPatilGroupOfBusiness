@@ -1,13 +1,15 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { ArrowRight, CheckCircle2, Sparkles, Building2, TrendingUp, Landmark } from 'lucide-react';
-import { BUSINESSES_DATA } from '../data/content';
+import { useLanguage } from '../context/LanguageContext';
 
 interface BusinessesSectionProps {
   onExploreBusiness: (slug: 'gavran-poultry-farms' | 'k-group-nursery') => void;
 }
 
 export const BusinessesSection: React.FC<BusinessesSectionProps> = ({ onExploreBusiness }) => {
+  const { content, t, language } = useLanguage();
+  const businesses = content.BUSINESSES_DATA;
   return (
     <section id="businesses" className="relative py-24 bg-[#080808] overflow-hidden">
       {/* Background ambient lighting */}
@@ -24,7 +26,7 @@ export const BusinessesSection: React.FC<BusinessesSectionProps> = ({ onExploreB
           >
             <Sparkles className="w-4 h-4 text-[#FFD700]" />
             <span className="text-xs uppercase tracking-widest text-[#FFD700] font-semibold">
-              Our Premier Enterprises
+              {t('businesses.eyebrow')}
             </span>
           </motion.div>
 
@@ -35,7 +37,7 @@ export const BusinessesSection: React.FC<BusinessesSectionProps> = ({ onExploreB
             transition={{ delay: 0.1 }}
             className="font-heading text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-4 leading-tight"
           >
-            Businesses Under <span className="gold-text-gradient">KANCHAN PATIL GROUP</span>
+            {t('businesses.titlePre')} <span className="gold-text-gradient">{t('businesses.titleHighlight')}</span>
           </motion.h2>
 
           <motion.p
@@ -45,13 +47,13 @@ export const BusinessesSection: React.FC<BusinessesSectionProps> = ({ onExploreB
             transition={{ delay: 0.2 }}
             className="text-gray-300 text-base sm:text-lg font-light"
           >
-            Delivering gold-standard agricultural produce, free-range poultry, and botanical landscaping excellence.
+            {t('businesses.subtitle')}
           </motion.p>
         </div>
 
         {/* 2 Luxury Business Cards */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-          {BUSINESSES_DATA.map((business, index) => {
+          {businesses.map((business, index) => {
             const isPoultry = business.id === 'gavran-poultry';
             return (
               <motion.div
@@ -114,7 +116,7 @@ export const BusinessesSection: React.FC<BusinessesSectionProps> = ({ onExploreB
                     onClick={() => onExploreBusiness(business.slug as any)}
                     className="w-full font-btn py-4 rounded-xl font-bold text-xs uppercase tracking-wider text-black bg-gradient-to-r from-[#D4AF37] via-[#FFD700] to-[#D4AF37] hover:shadow-[0_0_30px_rgba(212,175,55,0.7)] transition-all duration-300 flex items-center justify-center gap-2 group/btn cursor-pointer"
                   >
-                    {isPoultry ? 'Explore Farm →' : 'Explore Nursery →'}
+                    {language === 'mr' ? (isPoultry ? 'फार्म पहा →' : 'नर्सरी पहा →') : (isPoultry ? 'Explore Farm →' : 'Explore Nursery →')}
                   </button>
                 </div>
               </motion.div>

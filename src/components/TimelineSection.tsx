@@ -2,9 +2,11 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { Sprout, Globe, Building2, Sparkles, ArrowRight } from 'lucide-react';
 import { HenIcon } from './HenIcon';
-import { TIMELINE_DATA } from '../data/content';
+import { useLanguage } from '../context/LanguageContext';
 
 export const TimelineSection: React.FC = () => {
+  const { content, t } = useLanguage();
+  const timelineData = content.TIMELINE_DATA;
   const getIcon = (iconName: string) => {
     switch (iconName) {
       case 'Sprout':
@@ -37,7 +39,7 @@ export const TimelineSection: React.FC = () => {
           >
             <Sparkles className="w-4 h-4 text-[#FFD700]" />
             <span className="text-xs uppercase tracking-widest text-[#FFD700] font-semibold">
-              Our Journey & Growth Path
+              {t('timeline.eyebrow')}
             </span>
           </motion.div>
 
@@ -48,7 +50,7 @@ export const TimelineSection: React.FC = () => {
             transition={{ delay: 0.1 }}
             className="font-heading text-4xl sm:text-5xl font-extrabold text-white tracking-tight mb-4"
           >
-            Evolution Timeline of <span className="gold-text-gradient">K GROUP</span>
+            {t('timeline.titlePre')} <span className="gold-text-gradient">{t('timeline.titleHighlight')}</span>
           </motion.h2>
 
           <motion.p
@@ -58,7 +60,7 @@ export const TimelineSection: React.FC = () => {
             transition={{ delay: 0.2 }}
             className="text-gray-300 text-base sm:text-lg font-light"
           >
-            From a single botanical greenhouse to a diversified agri-tech & poultry powerhouse.
+            {t('timeline.subtitle')}
           </motion.p>
         </div>
 
@@ -68,7 +70,7 @@ export const TimelineSection: React.FC = () => {
           <div className="hidden lg:block absolute top-1/2 left-12 right-12 h-1 bg-gradient-to-r from-[#1F6B3A] via-[#D4AF37] to-[#FFD700] -translate-y-1/2 z-0 opacity-40 rounded-full" />
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 relative z-10">
-            {TIMELINE_DATA.map((item, idx) => (
+            {timelineData.map((item, idx) => (
               <motion.div
                 key={`${item.title}-${idx}`}
                 initial={{ opacity: 0, y: 30 }}

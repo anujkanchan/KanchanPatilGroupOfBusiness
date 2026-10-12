@@ -3,12 +3,14 @@ import { motion, useScroll, useTransform, useSpring } from 'motion/react';
 import { Leaf, ShieldCheck, Award, ArrowUpRight } from 'lucide-react';
 import { HenIcon } from './HenIcon';
 import aboutImg from '../assets/images/regenerated_image_1791441672721.png';
+import { useLanguage } from '../context/LanguageContext';
 
 interface AboutSectionProps {
   onNavigateToBusiness: (slug: 'gavran-poultry-farms' | 'k-group-nursery') => void;
 }
 
 export const AboutSection: React.FC<AboutSectionProps> = ({ onNavigateToBusiness }) => {
+  const { t, language } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -100,28 +102,28 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onNavigateToBusiness
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full glass-panel border border-[#D4AF37]/30 w-fit mb-4">
               <span className="w-2 h-2 rounded-full bg-[#D4AF37] animate-ping" />
               <span className="text-xs font-semibold text-[#FFD700] uppercase tracking-widest">
-                Our Corporate Identity
+                {t('about.eyebrow')}
               </span>
             </div>
 
             <h2 className="font-heading text-3xl sm:text-5xl font-extrabold text-white tracking-tight mb-6 leading-tight">
-              About <span className="gold-text-gradient">Kanchan Patil Group</span>
+              {t('about.titlePre')} <span className="gold-text-gradient">{t('about.titleHighlight')}</span>
             </h2>
 
             <p className="text-gray-300 text-lg leading-relaxed mb-6 font-light">
-              Kanchan Patil Group is a diversified enterprise driving excellence in premium agriculture, authentic Gavran poultry farming, high-tech nursery cultivation, and sustainable real estate - creating a legacy of trust, innovation, and growth.
+              {t('about.p1')}
             </p>
 
             <div className="mb-8">
               <p className="text-sm uppercase tracking-widest text-gray-400 font-semibold mb-4">
-                We Proudly Operate:
+                {language === 'mr' ? 'आम्ही अभिमानाने चालवतो:' : 'We Proudly Operate:'}
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {/* Gavran Poultry Farms Card */}
                 <button
                   onClick={() => onNavigateToBusiness('gavran-poultry-farms')}
-                  className="glass-card p-5 rounded-2xl border border-[#D4AF37]/20 text-left hover:border-[#FFD700] transition-all group"
+                  className="glass-card p-5 rounded-2xl border border-[#D4AF37]/20 text-left hover:border-[#FFD700] transition-all group cursor-pointer"
                 >
                   <div className="flex items-center justify-between mb-2">
                     <div className="w-10 h-10 rounded-xl bg-[#1F6B3A]/30 border border-[#D4AF37]/30 flex items-center justify-center text-[#FFD700]">
@@ -130,17 +132,17 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onNavigateToBusiness
                     <ArrowUpRight className="w-4 h-4 text-gray-400 group-hover:text-[#FFD700] transition-colors" />
                   </div>
                   <h3 className="font-heading text-lg font-bold text-white group-hover:text-[#FFD700] transition-colors">
-                    Gavran Poultry Farms
+                    {t('nav.poultryName')}
                   </h3>
                   <p className="text-xs text-gray-400 mt-1">
-                    Free-range country chicken & organic egg farming
+                    {t('nav.poultryDesc')}
                   </p>
                 </button>
 
                 {/* K Group of Nursery Card */}
                 <button
                   onClick={() => onNavigateToBusiness('k-group-nursery')}
-                  className="glass-card p-5 rounded-2xl border border-[#D4AF37]/20 text-left hover:border-[#FFD700] transition-all group"
+                  className="glass-card p-5 rounded-2xl border border-[#D4AF37]/20 text-left hover:border-[#FFD700] transition-all group cursor-pointer"
                 >
                   <div className="flex items-center justify-between mb-2">
                     <div className="w-10 h-10 rounded-xl bg-[#1F6B3A]/30 border border-[#D4AF37]/30 flex items-center justify-center text-[#FFD700]">
@@ -149,10 +151,10 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onNavigateToBusiness
                     <ArrowUpRight className="w-4 h-4 text-gray-400 group-hover:text-[#FFD700] transition-colors" />
                   </div>
                   <h3 className="font-heading text-lg font-bold text-white group-hover:text-[#FFD700] transition-colors">
-                    K Group of Nursery
+                    {t('nav.nurseryName')}
                   </h3>
                   <p className="text-xs text-gray-400 mt-1">
-                    Indoor plants, flowers, shade trees & landscaping
+                    {t('nav.nurseryDesc')}
                   </p>
                 </button>
               </div>
@@ -160,10 +162,10 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onNavigateToBusiness
 
             <div className="p-6 glass-panel rounded-2xl border border-[#D4AF37]/30 bg-[#141414]/80">
               <h4 className="font-heading text-base font-bold text-[#FFD700] mb-2">
-                Our Core Mission
+                {t('about.missionTitle')}
               </h4>
               <p className="text-sm text-gray-300 leading-relaxed">
-                Our mission is to provide trusted products, quality services, and sustainable solutions while building long-term customer relationships.
+                {t('about.missionText')}
               </p>
             </div>
           </motion.div>

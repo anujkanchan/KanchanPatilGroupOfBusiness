@@ -18,6 +18,7 @@ import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { DedicatedBusinessPage } from './components/DedicatedBusinessPage';
 import { GeminiChatbot } from './components/GeminiChatbot';
+import { LanguageProvider } from './context/LanguageContext';
 
 export default function App() {
   const [loading, setLoading] = useState(true);
@@ -51,7 +52,8 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-transparent text-white selection:bg-[#D4AF37] selection:text-black relative font-body">
+    <LanguageProvider>
+      <div className="min-h-screen bg-transparent text-white selection:bg-[#D4AF37] selection:text-black relative font-body">
       {/* Thin Gold Viewport Scroll Progress Bar */}
       <ScrollProgressBar />
 
@@ -145,5 +147,6 @@ export default function App() {
       {/* Gemini AI Multi-Turn Chatbot with Maps & Search Grounding */}
       <GeminiChatbot />
     </div>
-  );
+  </LanguageProvider>
+);
 }

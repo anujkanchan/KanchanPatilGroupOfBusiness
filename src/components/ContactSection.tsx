@@ -4,8 +4,10 @@ import { MapPin, Send, CheckCircle2, Sparkles, Clock, Mail, ExternalLink, Compas
 import { WhatsAppIcon } from './WhatsAppIcon';
 import { ContactFormData } from '../types';
 import { StyledLocationsMap } from './StyledLocationsMap';
+import { useLanguage } from '../context/LanguageContext';
 
 export const ContactSection: React.FC = () => {
+  const { t, language } = useLanguage();
   const [formData, setFormData] = useState<ContactFormData>({
     name: '',
     email: '',
@@ -51,7 +53,7 @@ export const ContactSection: React.FC = () => {
           >
             <Sparkles className="w-4 h-4 text-[#FFD700]" />
             <span className="text-xs uppercase tracking-widest text-[#FFD700] font-semibold">
-              Get In Touch
+              {t('contact.eyebrow')}
             </span>
           </motion.div>
 
@@ -62,7 +64,7 @@ export const ContactSection: React.FC = () => {
             transition={{ delay: 0.1 }}
             className="font-heading text-4xl sm:text-5xl font-extrabold text-white tracking-tight mb-4"
           >
-            Contact <span className="gold-text-gradient">K GROUP</span>
+            {t('contact.titlePre')} <span className="gold-text-gradient">{t('contact.titleHighlight')}</span>
           </motion.h2>
 
           <motion.p
@@ -72,7 +74,7 @@ export const ContactSection: React.FC = () => {
             transition={{ delay: 0.2 }}
             className="text-gray-300 text-base sm:text-lg font-light"
           >
-            Whether you require wholesale nursery orders, fresh poultry supply, or business partnerships, our team is at your service.
+            {t('contact.subtitle')}
           </motion.p>
         </div>
 
@@ -88,7 +90,7 @@ export const ContactSection: React.FC = () => {
           >
             <div className="glass-card rounded-3xl p-8 border border-[#D4AF37]/30 bg-[#141414]/90 space-y-6">
               <h3 className="font-heading text-2xl font-bold text-white mb-6 gold-text-gradient">
-                Corporate Headquarters
+                {language === 'mr' ? 'समूहाचे मुख्य कार्यालय' : 'Corporate Headquarters'}
               </h3>
 
               <div className="flex items-start gap-4">
@@ -97,7 +99,7 @@ export const ContactSection: React.FC = () => {
                 </div>
                 <div>
                   <h4 className="text-xs uppercase tracking-wider text-gray-400 font-semibold mb-1">
-                    Location & Registered Office
+                    {t('contact.addressLabel')}
                   </h4>
                   <p className="text-sm font-medium text-white leading-relaxed">
                     Kanchan Patil Farm's, Shindawane Road, Kaleshivar Mala, Uruli Kanchan, Tal - Haveli, Dist - Pune, Maharashtra 412202.
@@ -108,7 +110,7 @@ export const ContactSection: React.FC = () => {
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1.5 text-xs font-bold text-[#FFD700] hover:underline mt-2 bg-[#FFD700]/10 px-3 py-1.5 rounded-lg border border-[#D4AF37]/30 transition-all hover:bg-[#FFD700]/20"
                   >
-                    <ExternalLink className="w-3.5 h-3.5" /> Open in Google Maps Directly
+                    <ExternalLink className="w-3.5 h-3.5" /> {language === 'mr' ? 'गुगल मॅप्सवर थेट उघडा' : 'Open in Google Maps Directly'}
                   </a>
                 </div>
               </div>
@@ -119,7 +121,7 @@ export const ContactSection: React.FC = () => {
                 </div>
                 <div>
                   <h4 className="text-xs uppercase tracking-wider text-gray-400 font-semibold mb-1">
-                    Direct Contact & WhatsApp
+                    {t('contact.phoneLabel')}
                   </h4>
                   <a
                     href="https://wa.me/917517004343"
@@ -138,7 +140,7 @@ export const ContactSection: React.FC = () => {
                 </div>
                 <div>
                   <h4 className="text-xs uppercase tracking-wider text-gray-400 font-semibold mb-1">
-                    Email Address
+                    {t('contact.emailLabel')}
                   </h4>
                   <a
                     href="mailto:anujjjmitsoc@gmail.com"
@@ -155,10 +157,10 @@ export const ContactSection: React.FC = () => {
                 </div>
                 <div>
                   <h4 className="text-xs uppercase tracking-wider text-gray-400 font-semibold mb-1">
-                    Working Hours
+                    {t('contact.hoursLabel')}
                   </h4>
                   <p className="text-sm font-medium text-white">
-                    Mon - Sat: 8:00 AM - 7:00 PM (IST)
+                    {language === 'mr' ? 'सोम - शनि: सकाळी ८:०० ते संध्याकाळी ७:०० (IST)' : 'Mon - Sat: 8:00 AM - 7:00 PM (IST)'}
                   </p>
                 </div>
               </div>
@@ -244,24 +246,24 @@ export const ContactSection: React.FC = () => {
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <h3 className="font-heading text-2xl font-bold text-white mb-2">
-                    Send Us A Direct Message
+                    {t('contact.formTitle')}
                   </h3>
                   <p className="text-xs text-gray-400 mb-6">
-                    Please fill out the form below. All fields marked with * are required.
+                    {t('contact.formSubtitle')}
                   </p>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     {/* Name */}
                     <div>
                       <label className="block text-xs font-medium text-gray-300 uppercase tracking-wider mb-2">
-                        Your Name *
+                        {language === 'mr' ? 'आपले नाव *' : 'Your Name *'}
                       </label>
                       <input
                         type="text"
                         required
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        placeholder="e.g. Anuj Kanchan"
+                        placeholder={t('contact.namePlaceholder')}
                         className="w-full px-4 py-3 rounded-xl glass-panel border border-[#D4AF37]/30 text-white placeholder-gray-500 text-sm focus:outline-none focus:border-[#FFD700] transition-colors"
                       />
                     </div>
@@ -269,7 +271,7 @@ export const ContactSection: React.FC = () => {
                     {/* Email */}
                     <div>
                       <label className="block text-xs font-medium text-gray-300 uppercase tracking-wider mb-2">
-                        Email Address *
+                        {language === 'mr' ? 'ईमेल पत्ता *' : 'Email Address *'}
                       </label>
                       <input
                         type="email"
@@ -286,14 +288,14 @@ export const ContactSection: React.FC = () => {
                     {/* Phone */}
                     <div>
                       <label className="block text-xs font-medium text-gray-300 uppercase tracking-wider mb-2">
-                        Phone Number *
+                        {language === 'mr' ? 'मोबाईल नंबर *' : 'Phone Number *'}
                       </label>
                       <input
                         type="tel"
                         required
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        placeholder="+91 7517004343"
+                        placeholder={t('contact.phonePlaceholder')}
                         className="w-full px-4 py-3 rounded-xl glass-panel border border-[#D4AF37]/30 text-white placeholder-gray-500 text-sm focus:outline-none focus:border-[#FFD700] transition-colors"
                       />
                     </div>
@@ -301,17 +303,17 @@ export const ContactSection: React.FC = () => {
                     {/* Business Interest */}
                     <div>
                       <label className="block text-xs font-medium text-gray-300 uppercase tracking-wider mb-2">
-                        Business Interest *
+                        {language === 'mr' ? 'विषय / विभाग *' : 'Business Interest *'}
                       </label>
                       <select
                         value={formData.businessInterest}
                         onChange={(e) => setFormData({ ...formData, businessInterest: e.target.value as any })}
                         className="w-full px-4 py-3 rounded-xl glass-panel border border-[#D4AF37]/30 text-white text-sm focus:outline-none focus:border-[#FFD700] transition-colors bg-[#080808]"
                       >
-                        <option value="General Inquiry">General Inquiry</option>
-                        <option value="Gavran Poultry Farms">Gavran Poultry Farms</option>
-                        <option value="K Group of Nursery">K Group of Nursery</option>
-                        <option value="Investment / Partnership">Investment / Partnership</option>
+                        <option value="General Inquiry">{language === 'mr' ? 'सामान्य चौकशी' : 'General Inquiry'}</option>
+                        <option value="Gavran Poultry Farms">{t('nav.poultryName')}</option>
+                        <option value="K Group of Nursery">{t('nav.nurseryName')}</option>
+                        <option value="Investment / Partnership">{language === 'mr' ? 'गुंतवणूक / व्यावसायिक भागीदारी' : 'Investment / Partnership'}</option>
                       </select>
                     </div>
                   </div>
@@ -319,14 +321,14 @@ export const ContactSection: React.FC = () => {
                   {/* Message */}
                   <div>
                     <label className="block text-xs font-medium text-gray-300 uppercase tracking-wider mb-2">
-                      Message / Requirements *
+                      {language === 'mr' ? 'संदेश किंवा आवश्यकता *' : 'Message / Requirements *'}
                     </label>
                     <textarea
                       required
                       rows={4}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      placeholder="Specify your wholesale requirements, plant species, or poultry orders..."
+                      placeholder={t('contact.messagePlaceholder')}
                       className="w-full px-4 py-3 rounded-xl glass-panel border border-[#D4AF37]/30 text-white placeholder-gray-500 text-sm focus:outline-none focus:border-[#FFD700] transition-colors"
                     />
                   </div>
@@ -338,11 +340,11 @@ export const ContactSection: React.FC = () => {
                     className="w-full font-btn py-4 rounded-xl font-bold text-xs uppercase tracking-wider text-black bg-gradient-to-r from-[#D4AF37] via-[#FFD700] to-[#D4AF37] hover:shadow-[0_0_35px_rgba(212,175,55,0.7)] transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
                   >
                     {loading ? (
-                      <span className="animate-pulse">Processing...</span>
+                      <span className="animate-pulse">{language === 'mr' ? 'प्रक्रिया सुरू आहे...' : 'Processing...'}</span>
                     ) : (
                       <>
                         <Send className="w-4 h-4 text-black" />
-                        Send Golden Inquiry
+                        {t('contact.submitBtn')}
                       </>
                     )}
                   </button>
@@ -366,15 +368,15 @@ export const ContactSection: React.FC = () => {
               <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full glass-panel border border-[#D4AF37]/30 mb-2">
                 <Compass className="w-3.5 h-3.5 text-[#FFD700]" />
                 <span className="text-[10px] uppercase tracking-widest text-[#FFD700] font-semibold">
-                  Campus Navigation & Visitor Access
+                  {language === 'mr' ? 'परिसर नकाशे व भेट नियोजन' : 'Campus Navigation & Visitor Access'}
                 </span>
               </div>
               <h3 className="font-heading text-2xl sm:text-3xl font-extrabold text-white">
-                Find <span className="gold-text-gradient">Gavran Poultry Farms & K Group Nursery</span>
+                {t('contact.mapTitle')}
               </h3>
             </div>
             <p className="text-xs text-gray-400 max-w-md sm:text-right">
-              Explore marked locations on our estate in Uruli Kanchan, Pune. Click any pin to view details and live directions.
+              {language === 'mr' ? 'उरुळी कांचन, पुणे येथील आमच्या परिसराचा नकाशा पहा. दिशानिर्देश मिळवण्यासाठी कोणत्याही पिनवर क्लिक करा.' : 'Explore marked locations on our estate in Uruli Kanchan, Pune. Click any pin to view details and live directions.'}
             </p>
           </div>
 

@@ -7,9 +7,9 @@
     --bg-dark: #080808;
     --bg-secondary: #141414;
     --forest-green: #1F6B3A;
-    --font-heading: 'Outfit', sans-serif;
-    --font-body: 'Poppins', sans-serif;
-    --font-button: 'Montserrat', sans-serif;
+    --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-body: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-button: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
 
   body {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { Sparkles, ArrowRight, ChevronDown, Compass } from 'lucide-react';
-import { HERO_DATA } from '../data/content';
+import { useLanguage } from '../context/LanguageContext';
 
 interface HeroProps {
   onExploreBusinesses: () => void;
@@ -9,6 +9,8 @@ interface HeroProps {
 }
 
 export const Hero: React.FC<HeroProps> = ({ onExploreBusinesses, onContactUs }) => {
+  const { content, t, language } = useLanguage();
+  const heroData = content.HERO_DATA;
   const [tilt, setTilt] = React.useState({
     rotateX: 0,
     rotateY: 0,
@@ -68,7 +70,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreBusinesses, onContactUs }) 
       {/* Background Hero Asset with Cinematic Parallax Zoom */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <motion.img
-          src={HERO_DATA.heroImage}
+          src={heroData.heroImage}
           alt="Kanchan Patil Group Drone Shot"
           className="w-full h-full object-cover object-center filter brightness-[0.45] contrast-[1.15]"
           initial={{ scale: 1.15 }}
@@ -89,27 +91,17 @@ export const Hero: React.FC<HeroProps> = ({ onExploreBusinesses, onContactUs }) 
       {/* Hero Content */}
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
         {/* Eyebrow Pill */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel border border-[#D4AF37]/40 mb-6 backdrop-blur-md"
-        >
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel border border-[#D4AF37]/40 mb-6 backdrop-blur-md">
           <Sparkles className="w-4 h-4 text-[#FFD700] animate-pulse" />
           <span className="text-xs uppercase tracking-widest text-gray-200 font-semibold">
-            {HERO_DATA.welcome}
+            {heroData.welcome}
           </span>
-        </motion.div>
+        </div>
 
         {/* Title: KANCHAN PATIL GROUP */}
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.4 }}
-          className="font-heading text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-wider gold-text-gradient mb-4 gold-glow-text leading-tight"
-        >
-          {HERO_DATA.brand}
-        </motion.h1>
+        <h1 className="font-heading text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-wider gold-text-gradient mb-4 gold-glow-text leading-tight">
+          {heroData.brand}
+        </h1>
 
         {/* 3D Floating Framed Display Box (Circle Shape) */}
         <motion.div
@@ -147,7 +139,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreBusinesses, onContactUs }) 
               {/* Circular Image Container */}
               <div className="relative w-full h-full rounded-full overflow-hidden bg-black/60 shadow-inner">
                 <motion.img
-                  src={HERO_DATA.heroImage}
+                  src={heroData.heroImage}
                   alt="Kanchan Patil Group Estate & Farm"
                   className="w-full h-full object-cover object-center filter contrast-[1.08] brightness-[0.96] transition-transform duration-700 ease-out group-hover:scale-110"
                   referrerPolicy="no-referrer"
@@ -181,8 +173,12 @@ export const Hero: React.FC<HeroProps> = ({ onExploreBusinesses, onContactUs }) 
           transition={{ duration: 0.8, delay: 0.6 }}
           className="text-2xl sm:text-3xl md:text-4xl font-medium tracking-wide text-white mb-6 font-heading"
         >
-          <span className="text-[#D4AF37]">Growing Nature. </span>
-          <span className="text-gray-200">Building Trust.</span>
+          <span className="text-[#D4AF37]">
+            {language === 'mr' ? 'निसर्गाची समृद्धी. ' : 'Growing Nature. '}
+          </span>
+          <span className="text-gray-200">
+            {language === 'mr' ? 'विश्वासाची परंपरा.' : 'Building Trust.'}
+          </span>
         </motion.p>
 
         {/* Description */}
@@ -192,7 +188,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreBusinesses, onContactUs }) 
           transition={{ duration: 0.8, delay: 0.8 }}
           className="text-base sm:text-lg text-gray-300 max-w-2xl mb-10 leading-relaxed font-light"
         >
-          {HERO_DATA.description}
+          {heroData.description}
         </motion.p>
 
         {/* CTA Buttons */}
@@ -206,7 +202,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreBusinesses, onContactUs }) 
             onClick={onExploreBusinesses}
             className="w-full sm:w-1/2 font-btn px-6 py-4 rounded-full font-bold text-sm tracking-wider text-black bg-gradient-to-r from-[#D4AF37] via-[#FFD700] to-[#D4AF37] hover:shadow-[0_0_35px_rgba(212,175,55,0.7)] transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center gap-2 group cursor-pointer"
           >
-            <span>Explore Businesses</span>
+            <span>{t('hero.exploreBusinesses')}</span>
             <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
           </button>
 
@@ -215,7 +211,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreBusinesses, onContactUs }) 
             className="w-full sm:w-1/2 font-btn px-6 py-4 rounded-full font-semibold text-sm tracking-wider text-white glass-panel hover:bg-[#D4AF37]/10 hover:border-[#D4AF37] transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer transform hover:-translate-y-1"
           >
             <Compass className="w-4 h-4 text-[#D4AF37]" />
-            <span>Contact Us</span>
+            <span>{t('hero.contactUs')}</span>
           </button>
         </motion.div>
       </div>
@@ -238,7 +234,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreBusinesses, onContactUs }) 
         aria-label="Scroll down to About section"
       >
         <span className="text-[11px] tracking-[0.25em] uppercase text-gray-300 group-hover:text-[#FFD700] font-semibold transition-colors duration-300 pl-[0.25em] text-center">
-          Scroll Down
+          {language === 'mr' ? 'खाली स्क्रोल करा' : 'Scroll Down'}
         </span>
         <div className="w-6 h-10 rounded-full border-2 border-[#D4AF37]/50 group-hover:border-[#FFD700] flex justify-center p-1.5 backdrop-blur-md bg-black/30 group-hover:shadow-[0_0_15px_rgba(212,175,55,0.4)] transition-all duration-300">
           <motion.div

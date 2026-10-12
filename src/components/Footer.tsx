@@ -5,12 +5,15 @@ import { WhatsAppIcon } from './WhatsAppIcon';
 import { FOUNDER_DATA } from '../data/content';
 import kanchanLogo from '../assets/images/kanchan_group_logo.jpg';
 import { NewsletterSubscription } from './NewsletterSubscription';
+import { useLanguage } from '../context/LanguageContext';
 
 interface FooterProps {
   onNavigate: (page: 'home' | 'gavran-poultry-farms' | 'k-group-nursery', sectionId?: string) => void;
 }
 
 export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
+  const { t, language } = useLanguage();
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -35,16 +38,16 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               </div>
               <div>
                 <span className="font-heading text-xl font-black tracking-widest gold-text-gradient block leading-none">
-                  KANCHAN GROUP
+                  {t('nav.brand')}
                 </span>
                 <span className="text-[10px] text-gray-400 font-medium tracking-wider block mt-1 uppercase">
-                  Kanchan Group of Business
+                  {t('nav.tagline')}
                 </span>
               </div>
             </div>
 
             <p className="text-gray-400 text-sm font-light leading-relaxed">
-              Growing Nature. Building Trust. A premier corporate group leading sustainable agriculture, free-range country poultry farming, and botanical nursery cultivation.
+              {t('footer.description')}
             </p>
 
             <div className="flex items-center gap-3 pt-2">
@@ -81,7 +84,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           {/* Col 2: Quick Links */}
           <div className="lg:col-span-2 space-y-3">
             <h4 className="font-heading font-bold text-sm text-[#FFD700] uppercase tracking-wider mb-4">
-              Quick Links
+              {t('footer.quickLinks')}
             </h4>
             <ul className="space-y-2 text-sm text-gray-400">
               <li>
@@ -89,7 +92,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   onClick={() => onNavigate('home', 'hero')}
                   className="hover:text-[#FFD700] transition-colors"
                 >
-                  Home
+                  {t('nav.home')}
                 </button>
               </li>
               <li>
@@ -97,7 +100,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   onClick={() => onNavigate('home', 'about')}
                   className="hover:text-[#FFD700] transition-colors"
                 >
-                  About Us
+                  {t('nav.about')}
                 </button>
               </li>
               <li>
@@ -105,7 +108,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   onClick={() => onNavigate('home', 'founder')}
                   className="hover:text-[#FFD700] transition-colors"
                 >
-                  Founder & CEO
+                  {t('nav.founder')}
                 </button>
               </li>
               <li>
@@ -113,7 +116,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   onClick={() => onNavigate('home', 'gallery')}
                   className="hover:text-[#FFD700] transition-colors"
                 >
-                  Gallery
+                  {t('nav.gallery')}
                 </button>
               </li>
               <li>
@@ -121,7 +124,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   onClick={() => onNavigate('home', 'contact')}
                   className="hover:text-[#FFD700] transition-colors"
                 >
-                  Contact Us
+                  {t('nav.contact')}
                 </button>
               </li>
             </ul>
@@ -130,7 +133,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           {/* Col 3: Businesses */}
           <div className="lg:col-span-3 space-y-3">
             <h4 className="font-heading font-bold text-sm text-[#FFD700] uppercase tracking-wider mb-4">
-              Our Businesses
+              {t('footer.businesses')}
             </h4>
             <ul className="space-y-3 text-sm">
               <li>
@@ -141,10 +144,10 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   <HenIcon className="w-4 h-4 text-[#D4AF37] shrink-0 mt-0.5" />
                   <div>
                     <span className="font-medium text-white block group-hover:text-[#FFD700]">
-                      Gavran Poultry Farms
+                      {t('nav.poultryName')}
                     </span>
                     <span className="text-xs text-gray-400">
-                      Fresh Country Chicken & Eggs
+                      {t('nav.poultryDesc')}
                     </span>
                   </div>
                 </button>
@@ -157,10 +160,10 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   <Leaf className="w-4 h-4 text-[#D4AF37] shrink-0 mt-0.5" />
                   <div>
                     <span className="font-medium text-white block group-hover:text-[#FFD700]">
-                      K Group of Nursery
+                      {t('nav.nurseryName')}
                     </span>
                     <span className="text-xs text-gray-400">
-                      Indoor, Outdoor Flora & Landscaping
+                      {t('nav.nurseryDesc')}
                     </span>
                   </div>
                 </button>
@@ -171,7 +174,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           {/* Col 4: Direct Contact */}
           <div className="lg:col-span-3 space-y-3">
             <h4 className="font-heading font-bold text-sm text-[#FFD700] uppercase tracking-wider mb-4">
-              Direct Contact
+              {t('footer.contactInfo')}
             </h4>
             <div className="space-y-3 text-xs text-gray-300">
               <div className="flex items-start gap-2">
@@ -206,14 +209,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-gray-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-400">
           <div className="flex flex-col gap-1 text-center sm:text-left">
-            <p>© {new Date().getFullYear()} KANCHAN PATIL GROUP. All Rights Reserved. Designed with Excellence.</p>
+            <p>© {new Date().getFullYear()} {t('nav.brand')}. {t('footer.rights')} {t('footer.designedFor')}.</p>
             <p className="text-[#D4AF37] font-medium tracking-wide mt-1.5 flex flex-wrap items-center justify-center sm:justify-start gap-2">
               <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-gradient-to-r from-[#D4AF37]/20 via-[#FFD700]/25 to-[#D4AF37]/20 border border-[#FFD700]/50 text-[#FFD700] text-[11px] font-bold tracking-wider uppercase shadow-[0_0_12px_rgba(255,215,0,0.25)]">
                 <BadgeCheck className="w-3.5 h-3.5 fill-[#FFD700] text-black shrink-0" />
                 <span>VERIFIED DEVELOPER</span>
               </span>
               <span>
-                Developed by <span className="text-white font-semibold inline-flex items-center gap-1">ANUJ GANESH KANCHAN <BadgeCheck className="w-4 h-4 fill-[#FFD700] text-black shrink-0 inline-block" title="Verified Developer" /></span>, Founder - KANCHAN PATIL GROUP <span className="text-gray-400 font-normal">(Computer Science & Artificial Intelligence Engineer)</span>
+                {language === 'mr' ? 'विकासक' : 'Developed by'} <span className="text-white font-semibold inline-flex items-center gap-1">ANUJ GANESH KANCHAN <BadgeCheck className="w-4 h-4 fill-[#FFD700] text-black shrink-0 inline-block" title="Verified Developer" /></span>, {language === 'mr' ? 'संस्थापक' : 'Founder'} - {t('nav.brand')} <span className="text-gray-400 font-normal">({language === 'mr' ? 'संगणक व कृत्रिम बुद्धिमत्ता अभियंता' : 'Computer Science & Artificial Intelligence Engineer'})</span>
               </span>
             </p>
           </div>

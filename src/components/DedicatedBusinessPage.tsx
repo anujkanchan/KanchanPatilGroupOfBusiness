@@ -3,8 +3,8 @@ import { motion, AnimatePresence } from 'motion/react';
 import { ArrowLeft, CheckCircle2, Sparkles, Star, Leaf, Send, ShieldCheck, Phone, Mail, Award, ArrowRight, X } from 'lucide-react';
 import { HenIcon } from './HenIcon';
 import { StrategicExpansionSection } from './StrategicExpansionSection';
-import { BUSINESSES_DATA, TESTIMONIALS_DATA } from '../data/content';
 import { Business } from '../types';
+import { useLanguage } from '../context/LanguageContext';
 
 interface DedicatedBusinessPageProps {
   slug: 'gavran-poultry-farms' | 'k-group-nursery';
@@ -13,7 +13,8 @@ interface DedicatedBusinessPageProps {
 }
 
 export const DedicatedBusinessPage: React.FC<DedicatedBusinessPageProps> = ({ slug, onBackToHome, onNavigate }) => {
-  const business: Business | undefined = BUSINESSES_DATA.find(b => b.slug === slug);
+  const { content, t } = useLanguage();
+  const business: Business | undefined = content.BUSINESSES_DATA.find(b => b.slug === slug);
   const [activeTab, setActiveTab] = useState<'overview' | 'services' | 'gallery' | 'benefits' | 'inquiry'>('overview');
   const [inquiryOpen, setInquiryOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -47,11 +48,11 @@ export const DedicatedBusinessPage: React.FC<DedicatedBusinessPageProps> = ({ sl
           className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border border-[#D4AF37]/30 text-xs font-bold uppercase tracking-wider text-white hover:text-[#FFD700] hover:border-[#FFD700] transition-all cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4 text-[#D4AF37]" />
-          Back to K Group Corporate
+          {t('dedicated.back')}
         </button>
 
         <span className="text-xs font-semibold px-3 py-1 rounded-full glass-panel border border-[#D4AF37]/30 text-[#D4AF37] uppercase tracking-wider">
-          {isPoultry ? 'Poultry Division' : 'Nursery Division'}
+          {isPoultry ? (t('nav.poultryName') || 'Poultry Division') : (t('nav.nurseryName') || 'Nursery Division')}
         </span>
       </div>
 
@@ -90,7 +91,7 @@ export const DedicatedBusinessPage: React.FC<DedicatedBusinessPageProps> = ({ sl
                     className="font-btn px-8 py-4 rounded-full font-bold text-xs uppercase tracking-wider text-black bg-gradient-to-r from-[#D4AF37] via-[#FFD700] to-[#D4AF37] hover:shadow-[0_0_35px_rgba(212,175,55,0.7)] transition-all cursor-pointer flex items-center gap-2"
                   >
                     <Send className="w-4 h-4 text-black" />
-                    Place Direct Inquiry / Order
+                    {t('dedicated.placeOrder')}
                   </button>
                 </div>
               </div>
@@ -102,7 +103,7 @@ export const DedicatedBusinessPage: React.FC<DedicatedBusinessPageProps> = ({ sl
       {/* Highlights / Features Grid */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
         <h2 className="font-heading text-3xl font-bold text-white mb-8 border-b border-[#D4AF37]/20 pb-4">
-          Division <span className="gold-text-gradient">Highlights</span>
+          {t('dedicated.highlightsPre')} <span className="gold-text-gradient">{t('dedicated.highlightsPost')}</span>
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 sm:gap-6">
@@ -122,10 +123,10 @@ export const DedicatedBusinessPage: React.FC<DedicatedBusinessPageProps> = ({ sl
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
         <div className="text-center max-w-2xl mx-auto mb-12">
           <span className="text-xs font-bold text-[#FFD700] uppercase tracking-widest block mb-2">
-            Specialized Offerings
+            {t('dedicated.offeringsEyebrow')}
           </span>
           <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-white">
-            Services & Products
+            {t('dedicated.offeringsTitle')}
           </h2>
         </div>
 
@@ -153,7 +154,7 @@ export const DedicatedBusinessPage: React.FC<DedicatedBusinessPageProps> = ({ sl
       {/* Dedicated Gallery */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
         <h2 className="font-heading text-3xl font-bold text-white mb-8 border-b border-[#D4AF37]/20 pb-4">
-          Division <span className="gold-text-gradient">Gallery</span>
+          {t('dedicated.galleryPre')} <span className="gold-text-gradient">{t('dedicated.galleryPost')}</span>
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -181,7 +182,7 @@ export const DedicatedBusinessPage: React.FC<DedicatedBusinessPageProps> = ({ sl
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
         <div className="glass-card rounded-3xl p-8 sm:p-12 border border-[#D4AF37]/30 bg-[#141414]/90">
           <h2 className="font-heading text-3xl font-bold text-white mb-6 gold-text-gradient">
-            Why Partner With {business.name}?
+            {t('dedicated.whyPartner')} {business.name}?
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -236,22 +237,22 @@ export const DedicatedBusinessPage: React.FC<DedicatedBusinessPageProps> = ({ sl
               {submitted ? (
                 <div className="py-8 text-center">
                   <CheckCircle2 className="w-12 h-12 text-[#FFD700] mx-auto mb-4" />
-                  <h3 className="font-heading text-2xl font-bold text-white mb-2">Order Inquiry Sent</h3>
+                  <h3 className="font-heading text-2xl font-bold text-white mb-2">{t('dedicated.inquirySentTitle')}</h3>
                   <p className="text-xs text-gray-300">
-                    Thank you. The division manager for {business.name} will reach out to you shortly.
+                    {t('dedicated.inquirySentDesc')}
                   </p>
                 </div>
               ) : (
                 <form onSubmit={handleInquirySubmit} className="space-y-4">
                   <h3 className="font-heading text-2xl font-bold text-white">
-                    Inquire for {business.name}
+                    {t('dedicated.inquireFor')} {business.name}
                   </h3>
                   <p className="text-xs text-gray-400 mb-4">
-                    Direct order inquiry or bulk pricing request.
+                    {t('dedicated.inquireDesc')}
                   </p>
 
                   <div>
-                    <label className="block text-xs font-medium text-gray-300 mb-1">Full Name</label>
+                    <label className="block text-xs font-medium text-gray-300 mb-1">{t('dedicated.fullName')}</label>
                     <input
                       type="text"
                       required
@@ -261,7 +262,7 @@ export const DedicatedBusinessPage: React.FC<DedicatedBusinessPageProps> = ({ sl
                   </div>
 
                   <div>
-                    <label className="block text-xs font-medium text-gray-300 mb-1">Phone Number</label>
+                    <label className="block text-xs font-medium text-gray-300 mb-1">{t('dedicated.phone')}</label>
                     <input
                       type="tel"
                       required
@@ -271,7 +272,7 @@ export const DedicatedBusinessPage: React.FC<DedicatedBusinessPageProps> = ({ sl
                   </div>
 
                   <div>
-                    <label className="block text-xs font-medium text-gray-300 mb-1">Quantity / Requirement</label>
+                    <label className="block text-xs font-medium text-gray-300 mb-1">{t('dedicated.requirement')}</label>
                     <textarea
                       rows={3}
                       required
@@ -284,7 +285,7 @@ export const DedicatedBusinessPage: React.FC<DedicatedBusinessPageProps> = ({ sl
                     type="submit"
                     className="w-full font-btn py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider text-black bg-gradient-to-r from-[#D4AF37] to-[#FFD700]"
                   >
-                    Submit Order Request
+                    {t('dedicated.submitOrder')}
                   </button>
                 </form>
               )}

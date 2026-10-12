@@ -3,8 +3,10 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Sparkles, Maximize2, X } from 'lucide-react';
 import { GALLERY_ITEMS } from '../data/content';
 import { GalleryItem } from '../types';
+import { useLanguage } from '../context/LanguageContext';
 
 export const GallerySection: React.FC = () => {
+  const { t, language } = useLanguage();
   const [activeItem, setActiveItem] = useState<GalleryItem | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
 
@@ -31,7 +33,7 @@ export const GallerySection: React.FC = () => {
           >
             <Sparkles className="w-4 h-4 text-[#FFD700]" />
             <span className="text-xs uppercase tracking-widest text-[#FFD700] font-semibold">
-              Visual Showcase
+              {t('gallery.eyebrow')}
             </span>
           </motion.div>
 
@@ -42,7 +44,7 @@ export const GallerySection: React.FC = () => {
             transition={{ delay: 0.1 }}
             className="font-heading text-4xl sm:text-5xl font-extrabold text-white tracking-tight mb-4"
           >
-            K GROUP <span className="gold-text-gradient">Gallery</span>
+            {t('gallery.titlePre')} <span className="gold-text-gradient">{t('gallery.titleHighlight')}</span>
           </motion.h2>
 
           <motion.p
@@ -52,7 +54,7 @@ export const GallerySection: React.FC = () => {
             transition={{ delay: 0.2 }}
             className="text-gray-300 text-base sm:text-lg font-light"
           >
-            A visual glimpse into our natural farming, organic feeds, pure Gavran eggs, and free-roaming poultry environment.
+            {t('gallery.subtitle')}
           </motion.p>
         </div>
 
@@ -64,17 +66,25 @@ export const GallerySection: React.FC = () => {
                 ? GALLERY_ITEMS.length
                 : GALLERY_ITEMS.filter((item) => item.category === category).length;
             const isActive = selectedCategory === category;
+            const categoryLabels: Record<string, string> = {
+              All: language === 'mr' ? 'सर्व' : 'All',
+              Eggs: language === 'mr' ? 'अंडी' : 'Eggs',
+              Poultry: language === 'mr' ? 'पोल्ट्री' : 'Poultry',
+              Nursery: language === 'mr' ? 'रोपवाटिका' : 'Nursery',
+              Farm: language === 'mr' ? 'शेती' : 'Farm',
+              Corporate: language === 'mr' ? 'मुख्यालय' : 'Corporate',
+            };
             return (
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`px-4 py-2 rounded-full text-xs font-semibold tracking-wide transition-all duration-300 flex items-center gap-1.5 ${
+                className={`px-4 py-2 rounded-full text-xs font-semibold tracking-wide transition-all duration-300 flex items-center gap-1.5 cursor-pointer ${
                   isActive
                     ? 'bg-[#D4AF37] text-black shadow-lg shadow-[#D4AF37]/30 scale-105'
                     : 'bg-[#141414] text-gray-300 border border-[#D4AF37]/20 hover:border-[#D4AF37]/50 hover:text-white'
                 }`}
               >
-                <span>{category}</span>
+                <span>{categoryLabels[category] || category}</span>
                 <span
                   className={`text-[10px] px-1.5 py-0.5 rounded-full ${
                     isActive ? 'bg-black/20 text-black font-bold' : 'bg-white/10 text-gray-400'

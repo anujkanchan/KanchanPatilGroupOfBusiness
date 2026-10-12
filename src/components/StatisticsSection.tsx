@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { motion, useInView } from 'motion/react';
 import { Building2, Users, Flower, Feather, Egg } from 'lucide-react';
 import { HenIcon } from './HenIcon';
-import { STATS_DATA } from '../data/content';
+import { useLanguage } from '../context/LanguageContext';
 
 export const StatisticsSection: React.FC = () => {
+  const { content } = useLanguage();
+  const statsData = content.STATS_DATA;
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true });
 
@@ -30,7 +32,7 @@ export const StatisticsSection: React.FC = () => {
     <section ref={ref} className="relative py-20 bg-gradient-to-r from-[#080808] via-[#141414] to-[#080808] border-y border-[#D4AF37]/20 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 lg:gap-6">
-          {STATS_DATA.map((stat, idx) => (
+          {statsData.map((stat, idx) => (
             <motion.div
               key={stat.id}
               initial={{ opacity: 0, scale: 0.9 }}

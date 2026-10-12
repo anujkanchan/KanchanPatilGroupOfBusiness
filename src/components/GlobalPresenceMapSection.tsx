@@ -31,6 +31,7 @@ import {
   FARM_LOCATION_DETAILS
 } from '../data/worldMapData';
 import { KANCHAN_PATIL_FARMS_MAP_URL } from './StyledLocationsMap';
+import { useLanguage } from '../context/LanguageContext';
 
 export type MapZoomStage = 'global' | 'india' | 'maharashtra' | 'farm';
 
@@ -88,6 +89,7 @@ const STAGES: StageMeta[] = [
 ];
 
 export const GlobalPresenceMapSection: React.FC = () => {
+  const { t, language } = useLanguage();
   const [currentStageIndex, setCurrentStageIndex] = useState<number>(0);
   const [isPlayingAutoTour, setIsPlayingAutoTour] = useState<boolean>(false);
   const [webglSupported, setWebglSupported] = useState<boolean>(true);
@@ -954,7 +956,7 @@ export const GlobalPresenceMapSection: React.FC = () => {
           >
             <Globe className="w-3.5 h-3.5 text-[#D4AF37] animate-pulse" />
             <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-[#E6C665]">
-              Global Presence & Agro-Sanctuary Map
+              {t('map.eyebrow')}
             </span>
           </motion.div>
 
@@ -966,10 +968,21 @@ export const GlobalPresenceMapSection: React.FC = () => {
             transition={{ duration: 0.7, delay: 0.1 }}
             className="text-2xl sm:text-4xl md:text-5xl font-heading font-bold tracking-tight text-white mb-2.5 sm:mb-3"
           >
-            OUR{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F5DE93] via-[#D4AF37] to-[#AA7C11]">
-              GLOBAL PRESENCE
-            </span>
+            {language === 'mr' ? (
+              <>
+                आमची{' '}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F5DE93] via-[#D4AF37] to-[#AA7C11]">
+                  जागतिक उपस्थिती
+                </span>
+              </>
+            ) : (
+              <>
+                OUR{' '}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F5DE93] via-[#D4AF37] to-[#AA7C11]">
+                  GLOBAL PRESENCE
+                </span>
+              </>
+            )}
           </motion.h2>
 
           {/* Subtitle */}
@@ -980,7 +993,7 @@ export const GlobalPresenceMapSection: React.FC = () => {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="text-base sm:text-xl font-heading italic text-[#E5D7B7] mb-2 sm:mb-3 font-normal"
           >
-            “Rooted in India. Growing Beyond Borders.”
+            {language === 'mr' ? '“भारतात मुळे. सीमांच्या पलीकडे विस्तार.”' : '“Rooted in India. Growing Beyond Borders.”'}
           </motion.p>
 
           {/* Context paragraph */}
@@ -991,9 +1004,7 @@ export const GlobalPresenceMapSection: React.FC = () => {
             transition={{ duration: 0.7, delay: 0.3 }}
             className="text-xs sm:text-sm text-gray-400 font-light leading-relaxed max-w-2xl mx-auto px-2"
           >
-            Anchored at our bio-secure agro-sanctuary and pure Gavran breeding estate in Uruli Kanchan,
-            Pune, Maharashtra, Kanchan Patil Group bridges traditional Indian agriculture with world-class bio-security
-            and expanding regional-to-global logistics networks.
+            {t('map.subtitle')}
           </motion.p>
         </div>
 
@@ -1020,7 +1031,7 @@ export const GlobalPresenceMapSection: React.FC = () => {
                 title="Directly zoom to Kanchan Patil Farm in Uruli Kanchan, Pune"
               >
                 <Crosshair className="w-3.5 h-3.5 text-black" />
-                <span>Zoom to Farm</span>
+                <span>{language === 'mr' ? 'फार्म झूम' : 'Zoom to Farm'}</span>
               </button>
 
               <button
@@ -1030,7 +1041,7 @@ export const GlobalPresenceMapSection: React.FC = () => {
                 title="Reset to full world view"
               >
                 <RotateCcw className="w-3.5 h-3.5 text-[#D4AF37]" />
-                <span className="hidden sm:inline">World View</span>
+                <span className="hidden sm:inline">{language === 'mr' ? 'जागतिक दृश्य' : 'World View'}</span>
               </button>
             </div>
           </div>
@@ -1080,7 +1091,7 @@ export const GlobalPresenceMapSection: React.FC = () => {
             {/* Drag hint overlay */}
             <div className="absolute top-2.5 left-1/2 -translate-x-1/2 z-20 pointer-events-none bg-black/70 backdrop-blur-md px-3 py-1 rounded-full border border-[#D4AF37]/30 text-[10px] sm:text-xs text-[#E5D7B7] flex items-center gap-1.5 shadow-md">
               <Maximize2 className="w-3 h-3 text-[#D4AF37]" />
-              <span>Drag / swipe to explore the illuminated exhibit</span>
+              <span>{t('map.dragHint')}</span>
             </div>
 
             {/* WebGL 3D Canvas */}
@@ -1337,7 +1348,7 @@ export const GlobalPresenceMapSection: React.FC = () => {
                         className="w-full font-btn py-2 sm:py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm tracking-wider text-black bg-gradient-to-r from-[#D4AF37] via-[#FFD700] to-[#D4AF37] hover:shadow-[0_0_30px_rgba(212,175,55,0.7)] active:scale-95 transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer group"
                       >
                         <Navigation className="w-4 h-4 text-black group-hover:rotate-45 transition-transform duration-300" />
-                        <span>VIEW FARM LOCATION</span>
+                        <span>{language === 'mr' ? 'फार्मचे स्थान पहा' : 'VIEW FARM LOCATION'}</span>
                         <ExternalLink className="w-3.5 h-3.5 text-black/80 ml-0.5" />
                       </button>
                     </div>
@@ -1350,7 +1361,7 @@ export const GlobalPresenceMapSection: React.FC = () => {
           {/* Bottom Luxury Status Bar */}
           <div className="bg-[#0D0B08] border-t border-[#D4AF37]/20 px-3 sm:px-6 py-2.5 sm:py-3 flex flex-wrap items-center justify-between text-[11px] sm:text-xs text-gray-400 gap-2">
             <div className="flex items-center gap-1.5 sm:gap-2">
-              <span className="text-[#D4AF37] font-semibold">Active Destination:</span>
+              <span className="text-[#D4AF37] font-semibold">{language === 'mr' ? 'सक्रिय गंतव्य:' : 'Active Destination:'}</span>
               <span className="text-gray-300 font-mono text-[10px] sm:text-[11px] truncate">
                 Uruli Kanchan, Pune, Maharashtra
               </span>
@@ -1362,7 +1373,7 @@ export const GlobalPresenceMapSection: React.FC = () => {
                 onClick={handleOpenGoogleMaps}
                 className="text-[#E6C665] hover:text-white flex items-center gap-1 transition-colors cursor-pointer underline decoration-[#D4AF37]/40 hover:decoration-[#D4AF37]"
               >
-                <span>Open in Google Maps</span>
+                <span>{language === 'mr' ? 'गुगल मॅप्सवर उघडा' : 'Open in Google Maps'}</span>
                 <ExternalLink className="w-3 h-3 text-[#D4AF37]" />
               </button>
             </div>

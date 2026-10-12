@@ -60,6 +60,10 @@
   - Fluid ambient lighting canvas with subtle champagne dust motes.
   - PWA-ready with Web App Manifest and mobile application icons.
 
+- **Bilingual Language Switcher (English & Marathi):**
+  - Instant toggle in Navbar (`EN` / `मराठी`) with persistent user preference storage in `localStorage`.
+  - Comprehensive localization covering navigation, hero banner, business portfolio, founder biography, key metrics, client testimonials, photo gallery, dedicated division pages, contact forms, and 3D map annotations.
+
 ---
 
 ## 🛠️ Technology Stack
@@ -67,6 +71,7 @@
 | Layer | Technologies |
 |---|---|
 | **Frontend Framework** | React 19, TypeScript, Vite |
+| **State & Localization** | React Context API, LocalStorage persistence |
 | **Styling & Design** | Tailwind CSS v4, Custom CSS Design System |
 | **Animation & 3D** | Three.js (v0.186), Motion (`motion/react`), TopoJSON |
 | **Maps & Geospatial** | Google Maps Platform, `@vis.gl/react-google-maps` |
@@ -92,6 +97,10 @@
     ├── main.tsx              # React DOM initialization and quota listeners
     ├── types.ts              # TypeScript interfaces and stage models
     ├── assets/               # Logos and imagery
+    ├── context/
+    │   └── LanguageContext.tsx # Bilingual state management (EN / MR)
+    ├── translations/
+    │   └── translations.ts   # English & Marathi localized text dictionaries
     ├── data/
     │   └── content.ts        # Enterprise copy, business data, and coordinates
     └── components/
@@ -99,7 +108,7 @@
         ├── GeminiChatbot.tsx            # K - GPT AI Concierge modal
         ├── Hero.tsx                     # Cinematic hero header with 3D tilt
         ├── LoadingScreen.tsx            # Fast high-performance intro splash
-        ├── Navbar.tsx                   # Glassmorphic responsive header
+        ├── Navbar.tsx                   # Responsive header with Language Switcher
         ├── PremiumAmbientBackground.tsx # Ambient canvas glow & auroras
         ├── ScrollProgressBar.tsx        # GPU-accelerated top scroll indicator
         ├── StyledLocationsMap.tsx       # Google Maps Platform location view
