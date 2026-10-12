@@ -147,7 +147,10 @@ GEMINI_API_KEY="your-gemini-api-key"
 # Required for Google Maps Platform display
 VITE_GOOGLE_MAPS_API_KEY="your-google-maps-api-key"
 
-# Application host URL
+# Application URL
+APP_URL="https://kanchanpatil-groupofbusiness.ai.studio"
+
+# Application host URL in localhost
 APP_URL="http://localhost:3000"
 ```
 
